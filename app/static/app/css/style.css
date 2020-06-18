@@ -37,3 +37,7 @@ tr-unread
 {
     background-color: beige;
 }
+
+.inline-element{
+    display:inline-block;
+ }

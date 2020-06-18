@@ -1,21 +1,31 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
 import datetime
-from .forms import AttachmentForm
+from .forms import AttachmentForm, ProjectForm
 from .models import Project, Attachment
 
 def index(request):
     context = {'year':datetime.datetime.now().year}
     return render(request, 'app/index.html', context)
 
-def login(request):
+def login_view(request):
     context = {'year':datetime.datetime.now().year}
-    print('request.method : ' + request.method)
+    
     if request.method == 'POST':
-        return redirect('app:dashboard')
+        form = AuthenticationForm(data=request.POST)
+        print(form.errors)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('app:dashboard')
+        else:
+            return render(request, 'app/index.html', context)    
     else:
         return render(request, 'app/index.html', context)
 
-def logout(request):
+def logout_view(request):
     return redirect('app:index')
 
 def dashboard(request):
@@ -30,33 +40,24 @@ def projects(request):
 
 def add_project(request):
     if request.method == 'POST':
-        projectName = request.POST.get('projectName')
-        projectOwner = request.POST.get('projectOwner')
-        projectDescription = request.POST.get('projectDescription')
-        language = request.POST.get('language')
-        startDate = request.POST.get('startDate')
-        status = request.POST.get('status')
-        finishedDate = request.POST.get('finishedDate')
+        f = ProjectForm(data=request.POST)
+        
+        if f.is_valid():
+            p = f.save()
 
-        frmProject = Project(name=projectName, description=projectDescription, owner=projectOwner, startdate=startDate, 
-                             language=language, status=status, finishdate=finishedDate)
-        #frmProject.save()
-        frmProject.save()
-
-        prj = Project.objects.filter(name=projectName)
-        print(projectName)
-        f = open('test.txt', 'w')
-        files = request.FILES.getlist('file')
-        for fl in files:
-            f.writelines(str(fl) + '\n')
-            att = Attachment(name=str(fl), file=fl, project_id=prj[0].id)
-            att.save()
-        f.close()
-        print(files)
-        return redirect('app:add_project')
+            prj = Project.objects.filter(name=p.name)
+            
+            files = request.FILES.getlist('file')
+            for fl in files:
+                att = Attachment(name=str(fl), file=fl, project_id=prj[0].id)
+                att.save()
+                
+            return redirect('app:add_project')
     else:
-        form = AttachmentForm()
+        form_at = AttachmentForm()
+        form = ProjectForm()
         context = {'year':datetime.datetime.now().year,
+                   'form_at':form_at,
                    'form':form}
 
         return render(request, 'app/add_project.html', context)
@@ -66,20 +67,26 @@ def single_project(request, project_id):
 
     attachments = Attachment.objects.filter(project_id=project_id)
 
-    status = ['No Started', 'Started', 'In Progress', 'Halted', 'Finished']
-    languages = ['Android', 'Angular','C Shart','Django','Flask','Flutter','Ionic',
-                 'Java','Javascript','Kotlin','Laravel','PHP','Python','React','VueJS','Yii']
-
+    form = ProjectForm(instance=project)
     context = {'project' : project,
-               'attachments':attachments,
-               'status':status,
-               'languages':languages}
-    return render(request, 'app/single_project.html', context)
-    
-def update_project(request, project_id):
-    project = Project.objects.get(pk=project_id)
-
-    attachments = Attachment.objects.filter(project_id=project_id)
-    context = {'project' : project,
+               'form':form,
                'attachments':attachments}
-    return render(request, 'app/single_project.html', context)       
+    
+    if request.method == 'POST':
+        if 'update_project' in request.POST:
+            form = ProjectForm(request.POST)
+            form.save()
+            
+        elif 'remove_project' in request.POST:
+            id = request.POST.get("project_id")
+            Project.objects.filter(id=id).delete()
+            Attachment.objects.filter(project_id=id).delete()
+
+        return redirect('app:projects')
+    else:
+        return render(request, 'app/single_project.html', context)
+    
+def remove_attachment(request, project_id, attachment_id):
+    att = Attachment.objects.filter(project_id=project_id).filter(pk=attachment_id).delete()
+
+    return redirect('app:single_project', project_id=project_id)

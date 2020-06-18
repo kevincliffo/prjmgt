@@ -13,57 +13,34 @@
                 <div class="form-row">                
                     <div class="col-md-6">
                         <div class="form-label-group">
-                            <input class ="form-control" type="text" name="projectName" 
-                                id="projectName" placeholder = "Project Name" required = "required"/>
-                            <label for="projectName">Name</label>
+                            {{form.name}}                                
+                            <label for="name">Name</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-label-group">
-                            <input class ="form-control" type="text" name="projectOwner" 
-                                id="projectOwner" placeholder = "Owner" required = "required"/>
-                            <label for="projectOwner">Owner</label>
+                            {{form.owner}}
+                            <label for="owner">Owner</label>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="form-label-group">
-                    <input class ="form-control" type="text" name="projectDescription"
-                        id="projectDescription" placeholder = "Description" required = "required"/>
-                    <label for="projectDescription">Description</label>
+                    {{form.description}}
                 </div>
             </div>
             <div class="form-group">
                 <div class="form-row">
                     <div class="col-md-6">
                         <div class="form-label-group">
-                            <select class ="form-control"  name="language" id="language">
-                                <option selected disabled>Select Main Language</option>
-                                <option value="Android">Android</option>
-                                <option value="Angular">Angular</option>
-                                <option value="C Shart">C Sharp</option>
-                                <option value="Django">Django</option>
-                                <option value="Flask">Flask</option>
-                                <option value="Flutter">Flutter</option>
-                                <option value="Ionic">Ionic</option>
-                                <option value="Java">Java</option>
-                                <option value="Javascript">Javascript</option>
-                                <option value="Kotlin">Kotlin</option>
-                                <option value="Laravel">Laravel</option>
-                                <option value="PHP">PHP</option>
-                                <option value="Python">Python</option>
-                                <option value="React">React</option>
-                                <option value="VueJS">VueJS</option>
-                                <option value="Yii">Yii</option>
-                            </select>
+                            {{form.language}}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-label-group">
-                            <input class ="form-control" type="date" name="startDate" 
-                                id="startDate" placeholder = "Start Date" required = "required">
-                            <label for="startDate">Start Date</label>
+                            {{form.startdate}}
+                            <label for="startdate">Start Date</label>
                         </div>
                     </div>
                 </div>
@@ -72,20 +49,22 @@
                 <div class="form-row">
                     <div class="col-md-6">
                         <div class="form-label-group">
-                            <select class ="form-control"  name="status" id="status">
-                                <option selected value="No Started">No Started</option>
-                                <option value="Started">Started</option>
-                                <option value="In Progress">In Progress</option>
-                                <option value="Halted">Halted</option>
-                                <option value="Finished">Finished</option>
-                            </select>
+                            {{form.status}}
                         </div>
                     </div>
                     <div class="col-md-6">
+                        <div class="form-label-group">                            
+                            <div class="inline-element">{{form.finished.label}}{{form.finished}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" id="date_hide">
+                <div class="form-row">
+                    <div class="col-md-6">
                         <div class="form-label-group">
-                            <input class ="form-control" type="date" name="finishedDate" 
-                                id="finishedDate" required = "required">
-                            <label for="finishedDate">Finished Date</label>
+                            {{form.finishdate}}
+                            <label for="finishdate">Finished Date</label>
                         </div>
                     </div>
                 </div>
@@ -107,7 +86,7 @@
                             <tbody>
                                 <tr>
                                     <th scope="row">1</th>
-                                    <td>{{ form.file }}</td>
+                                    <td>{{ form_at.file }}</td>
                                 </tr>
                             </tbody>
                         </table>

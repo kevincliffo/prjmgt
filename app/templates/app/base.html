@@ -9,7 +9,7 @@
         <meta name="author" content="">
         <title>Project Management</title>
         <link rel="shortcut icon" type="image/png" href="{% static 'app/images/favicon.png' %}">
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' %}">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<link href="{% static 'app/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
 		<link href="{% static 'app/vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
 		<link href="{% static 'app/css/sb-admin.css' %}" rel="stylesheet">
@@ -117,10 +117,40 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script>
             $( function() {
-                $( "#paymentDate" ).datepicker({
-                    dateFormat: 'dd-mm-yy'
+                $( "#id_startdate" ).datepicker({
+                    dateFormat: 'yy-mm-dd'
                 });
+                $( "#id_finishdate" ).datepicker({
+                    dateFormat: 'yy-mm-dd'
+                });                
             } );
+        </script>
+        <script>            
+            $(function () {
+                var finish_date = document.getElementById("id_finishdate");
+                $('#id_finished').change(function () {
+                    if (!this.checked){
+                        $('#date_hide').hide();
+                        finish_date.value = "1900-01-01";
+                    }
+                    else
+                    {
+                        finish_date.value = "1900-01-01";
+                        $('#date_hide').show();
+                    }
+                });
+            });
+
+            $(document).ready(function () {
+                if (!this.checked){
+                    $('#date_hide').hide();
+                    finish_date.value = "1900-01-01";
+                }
+                else{
+                    $('#date_hide').show();
+                    finish_date.value = "1900-01-01";
+                }
+            });
         </script>
 <!--         
         <script type="text/javascript">

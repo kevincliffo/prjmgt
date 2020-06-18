@@ -9,6 +9,7 @@ class Project(models.Model):
     startdate = models.DateTimeField(default=timezone.now)
     language = models.CharField(max_length=100, default="")
     status = models.CharField(max_length=100, default="")
+    finished = models.BooleanField(default=False)
     finishdate = models.DateTimeField(default=timezone.now)
     
     def __str__(self):

@@ -24,26 +24,26 @@
                             <th scope="col">Start Date</th>
                             <th scope="col">Language</th>
                             <th scope="col">Status</th>
+                            <th scope="col">Finished</th>
                             <th scope="col">Finished Date</th>
-                            <th scope="col">View</th>
                             <th scope="col">View</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for project in projects %}
-                        <tr>
-                            <th scope="row">{{ project.id }}</th>
-                            <td>{{ project.name }}</td>
-                            <td>{{ project.description }}</td>
-                            <td>{{ project.owner }}</td>
-                            <td>{{ project.startdate|date:'d-m-Y' }}</td>
-                            <td>{{ project.language }}</td>
-                            <td>{{ project.status }}</td>
-                            <td>{{ project.finishdate|date:'d-m-Y' }}</td>
-                            <td><a href="{% url 'app:single_project' project.id %}">View</a></td>
-                            <td><a href="{% url 'app:update_project' project.id %}">Update</a></td>
-                        </tr>  		
-                    {% endfor %}
+                            <tr>
+                                <th scope="row">{{ project.id }}</th>
+                                <td>{{ project.name }}</td>
+                                <td>{{ project.description }}</td>
+                                <td>{{ project.owner }}</td>
+                                <td>{{ project.startdate|date:'d-m-Y' }}</td>
+                                <td>{{ project.language }}</td>
+                                <td>{{ project.status }}</td>
+                                <td>{{ project.finished }}</td>
+                                <td>{{ project.finishdate|date:'d-m-Y' }}</td>
+                                <td><a href="{% url 'app:single_project' project.id %}">View</a></td>
+                            </tr>  		
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
