@@ -1,0 +1,39 @@
+@font-face
+{
+    font-family: ubuntubold;
+    src: url(../fonts/ubuntu/Ubuntu-B.ttf) format('truetype'); 
+}
+@font-face
+{
+    font-family: ubuntunormal;
+    src: url(../fonts/ubuntu/Ubuntu-L.ttf) format('truetype'); 
+}
+@font-face
+{
+    font-family: hankenfont;
+    src: url(../fonts/Hanken-Book.ttf) format('truetype'); 
+}
+body{
+    font-family: ubuntunormal;
+}
+.site-logo-section{
+    background-color: aqua;
+    font-weight: bold;
+    font-family: ubuntubold;
+}
+
+.umoja-title{
+    color: white;
+    font-weight: bold;
+}
+
+.addmember-menu{
+    text-align: right;
+}
+.add-member-link{
+    padding-left: 30px;
+}
+tr-unread
+{
+    background-color: beige;
+}
