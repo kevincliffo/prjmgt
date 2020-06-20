@@ -77,7 +77,7 @@ def add_project(request):
 def single_project(request, project_id):
     project = Project.objects.get(pk=project_id)
     attachments = Attachment.objects.filter(project_id=project_id)
-    comments = Comment.objects.all().order_by('-id')
+    comments = Comment.objects.filter(project_id=project_id).order_by('-id')
 
     form = ProjectForm(instance=project)
     form_at = AttachmentForm()
@@ -131,5 +131,12 @@ def remove_attachment(request, project_id, attachment_id):
     
     if os.path.exists(file_name):
         os.remove(file_name)
+
+    return redirect('app:single_project', project_id=project_id)
+
+def remove_comment(request, project_id, comment_id):
+    com = Comment.objects.filter(project_id=project_id).filter(pk=comment_id)
+
+    com.delete()
 
     return redirect('app:single_project', project_id=project_id)

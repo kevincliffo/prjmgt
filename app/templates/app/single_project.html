@@ -106,6 +106,7 @@
                                 <tr>
                                     <th scope="col">Date - Time</th>
                                     <th scope="col">Comments</th>
+                                    <th scope="col">Remove</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -113,6 +114,7 @@
                                     <tr>
                                         <td>{{ comment.time|date:'d-m-Y H:i' }}</td>
                                         <td>{{ comment.comment }}</td>
+                                        <td><a href="{% url 'app:remove_comment' project.id comment.id %}">Remove</a></td>
                                     </tr>  		
                                 {% endfor %}
                                 <tr class="active">
