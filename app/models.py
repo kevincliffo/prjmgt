@@ -18,7 +18,16 @@ class Project(models.Model):
 class Attachment(models.Model):    
     name = models.CharField(max_length=100, default="")
     file = models.FileField(upload_to="attachments/", blank=True)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='project')
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='project_attachment', default=None)
 
     def __str__(self):
-        return self.name    
+        return self.name
+
+class Comment(models.Model):    
+    name = models.CharField(max_length=100, default="")
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='project_comment', default=None)
+    comment = models.TextField(max_length=1000, default="")
+    time = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.name

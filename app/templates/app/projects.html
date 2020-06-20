@@ -32,7 +32,7 @@
                     <tbody>
                         {% for project in projects %}
                             <tr>
-                                <th scope="row">{{ project.id }}</th>
+                                <th scope="row">{{ forloop.counter }}</th>
                                 <td>{{ project.name }}</td>
                                 <td>{{ project.description }}</td>
                                 <td>{{ project.owner }}</td>
@@ -42,7 +42,7 @@
                                 <td>{{ project.finished }}</td>
                                 <td>{{ project.finishdate|date:'d-m-Y' }}</td>
                                 <td><a href="{% url 'app:single_project' project.id %}">View</a></td>
-                            </tr>  		
+                            </tr>
                         {% endfor %}
                     </tbody>
                 </table>

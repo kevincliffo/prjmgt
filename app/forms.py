@@ -1,5 +1,5 @@
 from django.forms import ModelForm, TextInput, FileField, ClearableFileInput, DateInput, CheckboxInput, Textarea, Select
-from .models import Attachment, Project
+from .models import Attachment, Project, Comment
 
 class AttachmentForm(ModelForm):
 	class Meta:
@@ -12,6 +12,17 @@ class AttachmentForm(ModelForm):
 				widgets[field] = ClearableFileInput(attrs={'label':'Select Logo:','multiple': True})
 			else:
 				widgets[field] = TextInput(attrs={'class':'form-control mr-sm-2', 'placeholder':field.capitalize()})
+
+class CommentForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CommentForm, self).__init__(*args, **kwargs)
+        self.fields['comment'].initial = ' '
+        
+    class Meta:
+        model = Comment
+        fields = ['comment']
+
+        widgets = {'comment':Textarea(attrs={'class':'form-control', 'rows':2, 'placeholder':'Comments', 'required':False})}
 
 class ProjectForm(ModelForm):
     class Meta:
@@ -29,6 +40,7 @@ class ProjectForm(ModelForm):
             ('Android','Android'),
             ('Angular','Angular'),
             ('C Shart','C Shart'),
+            ('Codeigniter','Codeigniter'),
             ('Django','Django'),
             ('Flask','Flask'),
             ('Flutter','Flutter'),
