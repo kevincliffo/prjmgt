@@ -11,6 +11,8 @@ class Project(models.Model):
     status = models.CharField(max_length=100, default="")
     finished = models.BooleanField(default=False)
     finishdate = models.DateTimeField(default=timezone.now)
+    archived = models.BooleanField(default=False)
+    archivedate = models.DateTimeField(default=timezone.now)
     
     def __str__(self):
         return self.name

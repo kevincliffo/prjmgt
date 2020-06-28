@@ -4,7 +4,7 @@
         <li class="breadcrumb-item">
             <a href="{% url 'app:dashboard' %}">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Projects</li>
+        <li class="breadcrumb-item active">Archived Projects</li>
     </ol>
 
     <div class="card mb-3">
@@ -26,27 +26,23 @@
                             <th scope="col">Status</th>
                             <th scope="col">Finished</th>
                             <th scope="col">Finished Date</th>
-                            <th scope="col">View</th>
-                            <th scope="col">Archive</th>
+                            <th scope="col">Archived Date</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for project in projects %}
-                            {% if project.archived == False %}
-                                <tr>
-                                    <th scope="row">{{ forloop.counter }}</th>
-                                    <td>{{ project.name }}</td>
-                                    <td>{{ project.description }}</td>
-                                    <td>{{ project.owner }}</td>
-                                    <td>{{ project.startdate|date:'d-m-Y' }}</td>
-                                    <td>{{ project.language }}</td>
-                                    <td>{{ project.status }}</td>
-                                    <td>{{ project.finished }}</td>
-                                    <td>{{ project.finishdate|date:'d-m-Y' }}</td>
-                                    <td><a href="{% url 'app:single-project' project.id %}">View</a></td>
-                                    <td><a href="{% url 'app:archive-project' project.id %}">Archive</a></td>
-                                </tr>
-                            {% endif %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>{{ project.name }}</td>
+                                <td>{{ project.description }}</td>
+                                <td>{{ project.owner }}</td>
+                                <td>{{ project.startdate|date:'d-m-Y' }}</td>
+                                <td>{{ project.language }}</td>
+                                <td>{{ project.status }}</td>
+                                <td>{{ project.finished }}</td>
+                                <td>{{ project.finishdate|date:'d-m-Y' }}</td>
+                                <td>{{ project.archivedate|date:'d-m-Y' }}</td>
+                            </tr>
                         {% endfor %}
                     </tbody>
                 </table>

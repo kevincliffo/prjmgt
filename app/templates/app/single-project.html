@@ -114,7 +114,7 @@
                                     <tr>
                                         <td>{{ comment.time|date:'d-m-Y H:i' }}</td>
                                         <td>{{ comment.comment }}</td>
-                                        <td><a href="{% url 'app:remove_comment' project.id comment.id %}">Remove</a></td>
+                                        <td><a href="{% url 'app:remove-comment' project.id comment.id %}">Remove</a></td>
                                     </tr>  		
                                 {% endfor %}
                                 <tr class="active">
@@ -152,7 +152,7 @@
                                     <tr>
                                         <th scope="row">{{ attachment.id }}</th>
                                         <td>{{ attachment.name }}</td>
-                                        <td><a href="{% url 'app:remove_attachment' project.id attachment.id %}">Remove</a></td>
+                                        <td><a href="{% url 'app:remove-attachment' project.id attachment.id %}">Remove</a></td>
                                     </tr>  		
                                 {% endfor %}
                             </tbody>
