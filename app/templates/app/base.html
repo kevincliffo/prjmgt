@@ -55,12 +55,12 @@
 				<li class="nav-item active">
                     <a href="{% url 'app:dashboard' %}" class="nav-link"><i class="fas fa-fw fa-home"></i><span> Dashboard</span></a>
                 </li>
-				<li class="nav-item active">
-                    <a href="{% url 'app:projects' %}" class="nav-link"><i class="fas fa-book fa-fw"></i><span> Projects</span></a>
-                </li>
                 <li class="nav-item active">
                     <a href="{% url 'app:add-project' %}" class="nav-link"><i class="fas fa-book-open"></i><span> Add Project</span></a>
 				</li>
+				<li class="nav-item active">
+                    <a href="{% url 'app:projects' %}" class="nav-link"><i class="fas fa-book fa-fw"></i><span> Running Projects</span></a>
+                </li>
                 <li class="nav-item active">
                     <a href="{% url 'app:archived-projects' %}" class="nav-link"><i class="fas fa-briefcase"></i><span> Archived Projects</span></a>
 				</li> 
@@ -84,7 +84,7 @@
 		<a class="scroll-to-top rounded" href="#page-top">
 			<i class="fas fa-angle-up"></i>
 		</a>
-
+                
 		<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
