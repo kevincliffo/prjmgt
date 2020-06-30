@@ -72,7 +72,7 @@ def add_project(request):
                 att = Attachment(name=str(fl), file=fl, project_id=prj[0].id)
                 att.save()
                 
-            return redirect('app:add_project')
+            return redirect('app:add-project')
     else:
         form_at = AttachmentForm()
         form = ProjectForm()
